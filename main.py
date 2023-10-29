@@ -51,23 +51,23 @@ squad_rawdata['fb_essential'] = (
     squad_rawdata['Pac'] +
     squad_rawdata['Sta'])
 squad_rawdata['fb_core'] = (
-    squad_rawdata['Cro'] +
-    squad_rawdata['Dri'] +
+    squad_rawdata['Fir'] +
+    squad_rawdata['Pos'] +
     squad_rawdata['Mar'] +
     squad_rawdata['OtB'] +
     squad_rawdata['Tck'] +
     squad_rawdata['Tea'])
 squad_rawdata['fb_secondary'] = (
+    squad_rawdata['Dri'] +
     squad_rawdata['Agi'] +
     squad_rawdata['Ant'] +
     squad_rawdata['Cnt'] +
     squad_rawdata['Dec'] +
-    squad_rawdata['Fir'] +
+    squad_rawdata['Cro'] +
     squad_rawdata['Pas'] +
-    squad_rawdata['Pos'] +
     squad_rawdata['Tec'])
-squad_rawdata['fb'] =( ( ( squad_rawdata['fb_essential'] * 5) + ( squad_rawdata['fb_core'] * 3) + (squad_rawdata['fb_secondary'] * 1)) / 46 )
-squad_rawdata.fb= squad_rawdata.fb.round(1)
+squad_rawdata['iwb'] =( ( ( squad_rawdata['fb_essential'] * 5) + ( squad_rawdata['fb_core'] * 3) + (squad_rawdata['fb_secondary'] * 1)) / 46 )
+squad_rawdata.iwb = squad_rawdata.iwb.round(1)
 
 # calculates cb score
 squad_rawdata['cb_core'] = ( squad_rawdata['Cmp'] + squad_rawdata['Hea'] + squad_rawdata['Jum']+ squad_rawdata['Mar']+ squad_rawdata['Pas']+ squad_rawdata['Pos']+ squad_rawdata['Str'] + squad_rawdata['Tck'] + squad_rawdata['Pac']) / 9
@@ -138,7 +138,8 @@ squad_rawdata['box2'] = ((
     ( squad_rawdata['Fir'] * 1) +
     ( squad_rawdata['Dri'] * 1) +
     ( squad_rawdata['Tec'] * 1)) / 40 )
-squad_rawdata.box2= squad_rawdata.box2.round(0)
+squad_rawdata.box2= squad_rawdata.box2.round(1)
+
 
 # calculates winger score
 squad_rawdata['w_core'] = ( squad_rawdata['Acc'] + squad_rawdata['Cro'] + squad_rawdata['Dri']+ squad_rawdata['OtB']+ squad_rawdata['Pac']+ squad_rawdata['Tec']) / 6
@@ -190,7 +191,7 @@ squad_rawdata.str= squad_rawdata.str.round(1)
 squad_rawdata
 
 # builds squad dataframe using only columns that will be exported to HTML
-squad = squad_rawdata[['Inf','Name','Age','Club','Transfer Value','Wage','Nat','Position','Personality','Media Handling','Left Foot', 'Right Foot','Spd','Jum','Str','Work','Height','gk','fb','cb','box2','str']]
+squad = squad_rawdata[['Name','Age','Club','Transfer Value','Wage','Nat','Position','Personality','Media Handling','Left Foot', 'Right Foot','Spd','Jum','Str','Work','Height','gk','cb','iwb','box2','w','str']]
 
 # taken from here: https://www.thepythoncode.com/article/convert-pandas-dataframe-to-html-table-python
 # creates a function to make a sortable html export
@@ -205,6 +206,7 @@ def generate_html(dataframe: pd.DataFrame):
     <header>
         <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
     </header>
+    <h1>Darren's Player Analyzer That He Made Himself And Did Not Copy :)</h1>
     <body>
     {table_html}
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
