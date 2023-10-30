@@ -3,14 +3,12 @@ import glob
 import os
 
 # finds most recent file in specified folder
-list_of_files = glob.glob(os.path.join('C:/Users/darre/Desktop/FM_Data', '*'))
+list_of_files = glob.glob(os.path.join('C:/Users/Kevin/Desktop/FM_Data/input/', '*'))
 latest_file = max(list_of_files, key=os.path.getctime)
-print(latest_file)
 
 # Read HTML file exported by FM - in this case an example of an output from the squad page
 # This reads as a list, not a dataframe
 squad_rawdata_list = pd.read_html(latest_file, header=0, encoding="utf-8", keep_default_na=False)
-
 # turn the list into a dataframe
 squad_rawdata = squad_rawdata_list[0]
 
@@ -229,8 +227,10 @@ def generate_html(dataframe: pd.DataFrame):
 # generates random file name for write-out of html file
 import uuid
 file_name = str(uuid.uuid4()) + ".html"
-folder_name = "generated_scripts"
+print(file_name)
+folder_name = "C:/Users/Kevin/Desktop/FM_Data/output/"
 file_path = f"{folder_name}/{file_name}"
+print(file_path)
 
 
 # creates a sortable html export from the dataframe 'squad'
